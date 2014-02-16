@@ -1,0 +1,17 @@
+#!/bin/bash
+# Author: Paulo Jerônimo (@paulojeronimo, pj@paulojeronimo.info)
+
+BASEDIR=`dirname "$0"`
+source "$BASEDIR/functions"
+
+for mirror in $BASEDIR/../*
+do
+  for version in $mirror/*
+  do
+    for architecture in $version/*
+    do
+      name=`basename $mirror`-`basename $version`-`basename $architecture`
+      $BASEDIR/create-mirror-link.$name
+    done
+  done
+done

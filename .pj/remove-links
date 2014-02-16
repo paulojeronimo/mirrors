@@ -1,0 +1,7 @@
+#!/bin/bash
+# Author: Paulo Jerônimo (@paulojeronimo, pj@paulojeronimo.info)
+
+BASEDIR=`dirname "$0"`
+
+cd "$BASEDIR/.."
+find . -type l -delete

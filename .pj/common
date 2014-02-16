@@ -1,0 +1,32 @@
+#!/bin/bash
+# Author: Paulo Jerônimo (@paulojeronimo, pj@paulojeronimo.info)
+#
+# This is a shared code (not executable alone) used by scripts in this directory
+
+source "$BASEDIR/functions"
+
+LINK_TO=`echo ${SCRIPT#*.}`; debug "LINK_TO=$LINK_TO"
+if [ -L "$BASEDIR/$SCRIPT" ]
+then
+  MIRROR=`echo $LINK_TO | awk -F'-' '{ print $1; }'`
+  VERSION=`echo $LINK_TO | awk -F'-' '{ print $2; }'`
+  ARCHITECTURE=`echo $LINK_TO| awk -F'-' '{ print $3; }'`
+fi
+
+MIRROR=${MIRROR:-$1}; debug "MIRROR=$MIRROR"
+VERSION=${VERSION:-$2}; debug "VERSION=$VERSION"
+ARCHITECTURE=${ARCHITECTURE:-$3}; debug "ARCHITECTURE=$ARCHITECTURE"
+NAME=$MIRROR-$VERSION-$ARCHITECTURE; debug "NAME=$NAME"
+
+case "$NAME" in
+  CentOS-6.5-i386|\
+  CentOS-6.5-x86_64|\
+  Fedora-20-x86_64)
+    MIRROR_NAME=${NAME//-//}; debug "MIRROR_NAME=$MIRROR_NAME"
+    :
+    ;;
+  *)
+    echo "NAME isn't correctly configured!"
+    exit 1;
+    ;;
+esac

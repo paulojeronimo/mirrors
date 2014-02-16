@@ -1,0 +1,11 @@
+#!/bin/bash
+
+DEBUG=${DEBUG:-/usr/bin/false}
+
+debug() {
+  $DEBUG && echo "$@"
+}
+
+debug "BASEDIR=$BASEDIR"
+PROJECTDIR=`cd "$BASEDIR/.."; echo -n $PWD`; debug "PROJECTDIR=$PROJECTDIR"
+SCRIPT=`basename "$0"`; debug "SCRIPT=$SCRIPT"

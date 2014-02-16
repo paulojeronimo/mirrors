@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Para listar os tipos de sistemas operacionais possiveis filtrando apenas o Red Hat, execute:
+# VBoxManage list ostypes | grep RedHat
+
+VM_DIR=${VM_DIR:-~/VirtualBox\ VMs/vm-fedora}
+CENTOS_ISO=${CENTOS_ISO:-~/Sites/Fedora/releases/20/Fedora/x86_64/iso/Fedora-20-x86_64-netinst.iso}
+VBOXGUESTADDITIONS_ISO=${VBOXGUESTADDITIONS_ISO:-/Applications/VirtualBox.app/Contents/MacOS/VBoxGuestAdditions.iso}
+
+VBoxManage createvm --name vm-fedora --ostype Fedora_64 --register
+VBoxManage modifyvm vm-fedora --memory 4096 --clipboard bidirectional --accelerate3d on
+VBoxManage createhd --filename "$VM_DIR/vm-fedora.vdi" --size 16384 --format VDI
+VBoxManage storagectl vm-fedora --name "SATA Controller" --add sata --controller IntelAhci
+VBoxManage storageattach vm-fedora --storagectl "SATA Controller" --port 0 --device 0 --type hdd --medium "$VM_DIR/vm-fedora.vdi"
+VBoxManage storagectl vm-fedora --name "IDE Controller" --add ide --controller PIIX4
+VBoxManage storageattach vm-fedora --storagectl "IDE Controller" --port 1 --device 0 --type dvddrive --medium "$CENTOS_ISO"
+VBoxManage storageattach vm-fedora --storagectl "IDE Controller" --port 1 --device 1 --type dvddrive --medium "$VBOXGUESTADDITIONS_ISO"

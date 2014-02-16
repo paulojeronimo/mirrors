@@ -1,0 +1,14 @@
+#!/bin/bash
+# Author: Paulo Jerônimo (@paulojeronimo, pj@paulojeronimo.info)
+
+BASEDIR=`dirname "$0"`
+source "$BASEDIR/common"
+
+HTTP_SERVER_DIR=/tmp/$SCRIPT.$$; debug "HTTP_SERVER_DIR=$HTTP_SERVER_DIR"
+mkdir $HTTP_SERVER_DIR
+cd $HTTP_SERVER_DIR
+
+ln -s $BASEDIR/$MIRROR_NAME/mirror
+ln -s $BASEDIR/$MIRROR_NAME/vm/ks.base ks
+
+python -m SimpleHTTPServer 8080

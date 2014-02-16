@@ -1,0 +1,28 @@
+#!/bin/bash
+# Author: Paulo Jerônimo (@paulojeronimo, pj@paulojeronimo.info)
+set +x
+
+BASEDIR=`dirname "$0"`
+source "$BASEDIR/common"
+
+LINK_TYPE="${1:-local}"; debug "LINK_TYPE=$LINK_TYPE"
+link_is_local=true
+[ "$LINK_TYPE" = "local" ] || link_is_local=false
+
+cd "$BASEDIR/../$MIRROR/$VERSION/$ARCHITECTURE"
+rm -f mirror
+os=`uname -s`
+case $os in
+  Darwin) 
+    $link_is_local && \
+      ln -s /Volumes/data/mirrors/$NAME mirror || \
+      ln -s /Volumes/PJ-HFS/mirrors/$NAME mirror
+    ;;
+    
+  Linux)
+    $link_is_local && \
+      ln -s /home/mirrors/$NAME mirror || \
+      ln -s /run/media/pj/PJ-HFS/mirrors/$NAME mirror
+    ;;
+  *) echo "\"$os\" isn't supported!" exit 1;;
+esac

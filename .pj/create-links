@@ -1,0 +1,23 @@
+#!/bin/bash
+# Author: Paulo Jerônimo (@paulojeronimo, pj@paulojeronimo.info)
+
+BASEDIR=`dirname "$0"`
+
+cd $BASEDIR
+
+for mirror in ../*
+do
+  for version in $mirror/*
+  do
+    for architecture in $version/*
+    do
+      name=`basename $mirror`-`basename $version`-`basename $architecture`
+      ln -s create-mirror-link create-mirror-link.$name
+      ./create-mirror-link.$name
+      ln -s mirror-from-external-hd mirror-from-external-hd.$name
+      ln -s mirror-to-external-hd mirror-to-external-hd.$name
+      ln -s apache-configure-to apache-configure-to.$name
+      ln -s http-server-start http-server-start.$name
+    done
+  done
+done
