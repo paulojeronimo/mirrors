@@ -4,16 +4,15 @@
 BASEDIR=`dirname "$0"`
 source "$BASEDIR/functions"
 
-for mirror in $BASEDIR/../*
+cd "$BASEDIR/.."
+
+for mirror in `find . -maxdepth 1 -type d ! -name '.*'`
 do
   for version in $mirror/*
   do
     for architecture in $version/*
     do
-      debug "mirror=$mirror"
-      debug "version=$version"
-      debug "architecture=$architecture"
-      rm -rf $BASEDIR/../`basename $mirror`/`basename $version`/`basename $architecture`/mirror
+      rm -rf `basename $mirror`/`basename $version`/`basename $architecture`/mirror
     done
   done
 done

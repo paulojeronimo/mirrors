@@ -2,10 +2,11 @@
 # Author: Paulo Jerônimo (@paulojeronimo, pj@paulojeronimo.info)
 
 BASEDIR=`dirname "$0"`
+source "$BASEDIR/functions"
 
-cd $BASEDIR
+cd "$BASEDIR"
 
-for mirror in ../*
+for mirror in `find .. -maxdepth 1 -type d ! -name '.*'`
 do
   for version in $mirror/*
   do

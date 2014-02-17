@@ -1,0 +1,31 @@
+#!/bin/bash
+# Author: Paulo Jerônimo (@paulojeronimo, pj@paulojeronimo.info)
+
+BASEDIR=`dirname "$0"`
+source "$BASEDIR/common"
+
+configs="$BASEDIR/config $BASEDIR/config.sample"
+for config in $configs
+do
+   [ -f "$config" ] && { source "$config"; found=true; } || found=false
+done
+
+$found || { echo "No configuration file found!"; exit 1; }
+
+os=`uname -s`
+case $os in
+  Darwin)
+    EXTERNAL_MIRRORS_DIR=$EXTERNAL_MIRRORS_DIR_ON_DARWIN
+    ;;
+  Linux)
+    EXTERNAL_MIRRORS_DIR=$EXTERNAL_MIRRORS_DIR_ON_LINUX
+    ;;
+  *)
+    echo "\"$os\" isn't supported!"
+    exit 1
+    ;;
+esac
+
+rsync -av --update --delete \
+"$BASEDIR/../$MIRROR_NAME/mirror/" \
+"$EXTERNAL_MIRRORS_DIR/$NAME/"

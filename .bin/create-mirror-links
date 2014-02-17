@@ -4,14 +4,14 @@
 BASEDIR=`dirname "$0"`
 source "$BASEDIR/functions"
 
-for mirror in $BASEDIR/../*
+for mirror in `find "$BASEDIR/.." -maxdepth 1 -type d ! -name '.*'`
 do
   for version in $mirror/*
   do
     for architecture in $version/*
     do
       name=`basename $mirror`-`basename $version`-`basename $architecture`
-      $BASEDIR/create-mirror-link.$name
+      $BASEDIR/create-mirror-link.$name "$@"
     done
   done
 done
