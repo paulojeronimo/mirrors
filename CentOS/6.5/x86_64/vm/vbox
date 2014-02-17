@@ -3,7 +3,7 @@
 # Para listar os tipos de sistemas operacionais possiveis filtrando apenas o Red Hat, execute:
 # VBoxManage list ostypes | grep RedHat
 
-VM_BASEFOLDER=${VM_BASEFOLDER:-/Volumes/data/vms}
+VM_BASEFOLDER=${VM_BASEFOLDER:-~/curso-jboss/vms}
 VM_DIR=$VM_BASEFOLDER/vm-centos
 CENTOS_ISO=${CENTOS_ISO:-~/Sites/centos/isos/x86_64/CentOS-6.5-x86_64-netinstall.iso}
 VBOXGUESTADDITIONS_ISO=${VBOXGUESTADDITIONS_ISO:-/Applications/VirtualBox.app/Contents/MacOS/VBoxGuestAdditions.iso}

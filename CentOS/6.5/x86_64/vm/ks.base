@@ -14,7 +14,7 @@ rootpw @lun0123
 user --name=aluno --groups=wheel --password=@lun0123
 
 # HTTP mirror URL
-url --url http://10.0.2.2/centos/os/x86_64
+url --url http://10.0.2.2/~aluno/centos/os/x86_64
 
 # Informações para configuração da rede
 network  --hostname=vm-centos --bootproto=dhcp --device=eth0 --onboot=on
@@ -120,19 +120,19 @@ rm /etc/yum.repos.d/*.repo
 cat >> /etc/yum.repos.d/base.repo <<'EOF'
 [base]
 name=CentOS-$releasever - Base
-baseurl=http://base/centos/os/$basearch/
+baseurl=http://base/~aluno/centos/os/$basearch/
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6
 
 [updates]
 name=CentOS-$releasever - Updates
-baseurl=http://base/centos/updates/$basearch/
+baseurl=http://base/~aluno/centos/updates/$basearch/
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6
 
 [extras]
 name=CentOS-$releasever - Extras
-baseurl=http://base/centos/extras/$basearch/
+baseurl=http://base/~aluno/centos/extras/$basearch/
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6
 EOF
