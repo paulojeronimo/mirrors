@@ -29,11 +29,9 @@ rsync --progress -avrt --delete --delete-excluded \
 --exclude "Everything/source/*" \
 --exclude "Fedora/armhfp/*" \
 --exclude "Fedora/i386/*" \
---exclude "Fedora/x86_64/iso/Fedora-$FEDORA_VERSION-x86_64-DVD.iso" \
 --exclude "Fedora/source/*" \
 --exclude "Images/*" \
 --exclude "Live/*" \
---include "Live/x86_64/Fedora-Live-Desktop-x86_64-20-1.iso" \
 $RSYNC_RELEASES_DIR releases/$FEDORA_VERSION
 
 mkdir -p "$d/updates" && cd "$d"
