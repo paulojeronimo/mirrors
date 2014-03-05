@@ -1,0 +1,15 @@
+configs="$BASEDIR/config $BASEDIR/config.sample"
+found=false
+for config in $configs
+do
+   [ -f "$config" ] && { source "$config"; found=true; break; }
+done
+
+if $found 
+then
+  debug "\"$config\" file loaded!"
+else
+  echo "No configuration file found!"
+  exit 1
+fi
+

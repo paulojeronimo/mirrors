@@ -4,14 +4,7 @@ set +x
 
 BASEDIR=`dirname "$0"`
 source "$BASEDIR/common"
-
-configs="$BASEDIR/config $BASEDIR/config.sample"
-for config in $configs
-do
-   [ -f "$config" ] && { source "$config"; found=true; } || found=false
-done
-
-$found || { echo "No configuration file found!"; exit 1; }
+source "$BASEDIR/load-config"
 
 LINK_TYPE="${1:-local}"; debug "LINK_TYPE=$LINK_TYPE"
 link_is_local=true
@@ -28,7 +21,7 @@ case $os in
     ;;
   Linux)
     $link_is_local && \
-      ln -s $LOCAL_MIRRRORS_DIR_ON_LINUX/$NAME mirror || \
+      ln -s $LOCAL_MIRRORS_DIR_ON_LINUX/$NAME mirror || \
       ln -s $EXTERNAL_MIRRORS_DIR_ON_LINUX/$NAME mirror
     ;;
   *) 

@@ -3,14 +3,7 @@
 
 BASEDIR=`dirname "$0"`
 source "$BASEDIR/common"
-
-configs="$BASEDIR/config $BASEDIR/config.sample"
-for config in $configs
-do
-   [ -f "$config" ] && { source "$config"; found=true; } || found=false
-done
-
-$found || { echo "No configuration file found!"; exit 1; }
+source "$BASEDIR/load-config"
 
 os=`uname -s`
 case $os in
