@@ -3,7 +3,6 @@
 set +x
 
 BASEDIR=`dirname "$0"`
-source "$BASEDIR/common"
 source "$BASEDIR/load-config"
 
 LINK_TYPE="${1:-local}"; debug "LINK_TYPE=$LINK_TYPE"

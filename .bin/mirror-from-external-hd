@@ -2,7 +2,6 @@
 # Author: Paulo Jerônimo (@paulojeronimo, pj@paulojeronimo.info)
 
 BASEDIR=`dirname "$0"`
-source "$BASEDIR/common"
 source "$BASEDIR/load-config"
 
 os=`uname -s`

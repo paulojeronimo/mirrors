@@ -1,3 +1,10 @@
+#!/bin/bash
+# Author: Paulo Jerônimo (@paulojeronimo, pj@paulojeronimo.info)
+#
+# This is a shared code (not executable alone) used by scripts in this directory
+
+source "$BASEDIR/common"
+
 configs="$BASEDIR/config $BASEDIR/config.sample"
 found=false
 for config in $configs
@@ -12,4 +19,3 @@ else
   echo "No configuration file found!"
   exit 1
 fi
-
