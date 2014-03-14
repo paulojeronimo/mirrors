@@ -5,8 +5,20 @@
 
 VM_BASEFOLDER=${VM_BASEFOLDER:-~/curso-jboss/vms}
 VM_DIR=$VM_BASEFOLDER/vm-centos
-CENTOS_ISO=${CENTOS_ISO:-~/Sites/centos/isos/i386/CentOS-6.5-i386-netinstall.iso}
-VBOXGUESTADDITIONS_ISO=${VBOXGUESTADDITIONS_ISO:-/Applications/VirtualBox.app/Contents/MacOS/VBoxGuestAdditions.iso}
+case `uname` in
+  Darwin)
+    CENTOS_ISO=${CENTOS_ISO:-~/Sites/centos/isos/i386/CentOS-6.5-i386-netinstall.iso}
+    VBOXGUESTADDITIONS_ISO=${VBOXGUESTADDITIONS_ISO:-/Applications/VirtualBox.app/Contents/MacOS/VBoxGuestAdditions.iso}
+    ;;
+  Linux)
+    CENTOS_ISO=${CENTOS_ISO:-~/public_html/centos/isos/i386/CentOS-6.5-i386-netinstall.iso}
+    VBOXGUESTADDITIONS_ISO=${VBOXGUESTADDITIONS_ISO:-/usr/share/virtualbox/VBoxGuestAdditions.iso}
+    ;;
+  *)
+    echo "Esse script ainda não está configurado para \"`uname`\"!"
+    exit 1
+    ;;
+esac
 
 VBoxManage createvm --name vm-centos --ostype RedHat --register --basefolder "$VM_BASEFOLDER"
 VBoxManage modifyvm vm-centos --memory 2048 --clipboard bidirectional --accelerate3d on
