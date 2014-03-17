@@ -128,7 +128,7 @@ cat > $f <<EOF
 #!/bin/bash
 cd
 rm -rf *
-sudo /media/VBOXADDITIONS_4.3.6_91406/VBoxLinuxAdditions.run
+sudo /media/VBOXADDITIONS_4.3.8_92456/VBoxLinuxAdditions.run
 EOF
 chown aluno: $f
 chmod +x $f
