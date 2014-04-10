@@ -20,8 +20,10 @@ RSYNC_DIR=${RSYNC_DIR:-rsync://linorg.usp.br/CentOS/$CENTOS_VERSION/}
   d=$CENTOS_MIRROR || \
   d=$(d=`dirname "$0"`/mirror; mkdir -p "$d" && cd "$d"; echo -n $PWD)
 
+[ -w "$d/" ] && unset sudo || sudo=sudo
+
 # This will rsync only CentOS i386 and exclude x86_64
-rsync --progress -avrt --delete --delete-excluded \
+$sudo rsync --progress -avrt --delete --delete-excluded \
 --include "isos/i386/CentOS-$CENTOS_VERSION-i386-netinstall.iso" \
 --exclude "isos/i386/*" \
 --exclude "isos/x86_64" \

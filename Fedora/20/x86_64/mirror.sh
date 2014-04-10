@@ -18,11 +18,15 @@ RSYNC_RELEASES_DIR=${RSYNC_RELEASES_DIR:-$RSYNC_BASE_DIR/releases/$FEDORA_VERSIO
 RSYNC_UPDATES_DIR=${RSYNC_UPDATES_DIR:-$RSYNC_BASE_DIR/updates/$FEDORA_VERSION/}
 
 # FEDORA_MIRROR indicates the full PATH to the mirror directory. If you don't specify it, the mirror will be created in the same dir running this script.
-[ "$FEDORA_MIRROR" ] && d=$FEDORA_MIRROR || d=$(d=`dirname $0`/mirror; mkdir -p "$d" && cd "$d"; echo -n $PWD)
+[ "$FEDORA_MIRROR" ] && \
+  d=$FEDORA_MIRROR || \
+  d=$(d=`dirname "$0"`/mirror; mkdir -p "$d" && cd "$d"; echo -n $PWD)
 
-mkdir -p "$d/releases" && cd "$d"
+[ -w "$d/" ] && unset sudo || sudo=sudo
 
-rsync --progress -avrt --delete --delete-excluded \
+$sudo mkdir -p "$d/releases" && cd "$d"
+
+$sudo rsync --progress -avrt --delete --delete-excluded \
 --exclude "Everything/armhfp/*" \
 --exclude "Everything/i386/*" \
 --exclude "Everything/x86_64/debug/*" \
@@ -34,9 +38,9 @@ rsync --progress -avrt --delete --delete-excluded \
 --exclude "Live/*" \
 $RSYNC_RELEASES_DIR releases/$FEDORA_VERSION
 
-mkdir -p "$d/updates" && cd "$d"
+$sudo mkdir -p "$d/updates" && cd "$d"
 
-rsync --progress -avrt --delete --delete-excluded \
+$sudo rsync --progress -avrt --delete --delete-excluded \
 --exclude "armhfp/*" \
 --exclude "i386/*" \
 --exclude "x86_64/debug/*" \
