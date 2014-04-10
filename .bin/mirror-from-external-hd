@@ -20,6 +20,8 @@ case $os in
     ;;
 esac
 
-rsync -av --update --delete \
+[ -w "$LOCAL_MIRRORS_DIR" ] && unset sudo || sudo=sudo
+
+$sudo rsync -av --update --delete \
 "$EXTERNAL_MIRRORS_DIR/$NAME" \
 "$LOCAL_MIRRORS_DIR"
