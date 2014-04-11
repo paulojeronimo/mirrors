@@ -124,11 +124,12 @@ rm /etc/yum.repos.d/CentOS-*.repo
 
 # Gera o script de pós-instalação para ser executado pelo aluno após iniciar o modo gráfico
 f=/home/aluno/.pos-install.sh
-cat > $f <<EOF
+cat > $f <<'EOF'
 #!/bin/bash
 cd
 rm -rf *
-sudo /media/VBOXADDITIONS_4.3.8_92456/VBoxLinuxAdditions.run
+dotrun=`echo /media/VBOXADDITIONS_*/VBoxLinuxAdditions.run`
+sudo $dotrun
 EOF
 chown aluno: $f
 chmod +x $f
