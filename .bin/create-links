@@ -17,8 +17,6 @@ do
       ./create-mirror-link.$name
       ln -s mirror-from-external-hd mirror-from-external-hd.$name
       ln -s mirror-to-external-hd mirror-to-external-hd.$name
-      ln -s apache-configure-to apache-configure-to.$name
-      ln -s http-server-start http-server-start.$name
     done
   done
 done

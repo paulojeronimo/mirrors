@@ -1,9 +1,7 @@
 .bin/config
 
 # links
-.bin/apache-configure-to.*
 .bin/create-mirror-link.*
-.bin/http-server-start.*
 .bin/mirror-from-external-hd.*
 .bin/mirror-to-external-hd.*
 **/mirror

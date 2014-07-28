@@ -8,10 +8,8 @@ cd "$BASEDIR/.."
 # TODO: verify why this is'nt working on Fedora:
 #find . -type l -delete
 
-rm -f .bin/apache-configure-to.*
 rm -f .bin/create-mirror-link.*
-rm -f .bin/http-server-start.*
 rm -f .bin/mirror-from-external-hd.*
 rm -f .bin/mirror-to-external-hd.*
-rm -f CentOS/6.5/{i386,x86_64}/mirror
+rm -f CentOS/{6.5,7}/{i386,x86_64}/mirror
 rm -f Fedora/20/x86_64/mirror
