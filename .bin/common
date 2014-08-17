@@ -17,17 +17,4 @@ MIRROR=${MIRROR:-$1}; debug "MIRROR=$MIRROR"
 VERSION=${VERSION:-$2}; debug "VERSION=$VERSION"
 ARCHITECTURE=${ARCHITECTURE:-$3}; debug "ARCHITECTURE=$ARCHITECTURE"
 NAME=$MIRROR-$VERSION-$ARCHITECTURE; debug "NAME=$NAME"
-
-case "$NAME" in
-  CentOS-6.5-i386|\
-  CentOS-6.5-x86_64|\
-  CentOS-7-x86_64|\
-  Fedora-20-x86_64)
-    MIRROR_NAME=${NAME//-//}; debug "MIRROR_NAME=$MIRROR_NAME"
-    :
-    ;;
-  *)
-    echo "NAME isn't correctly configured!"
-    exit 1;
-    ;;
-esac
+MIRROR_NAME=${NAME}; debug "MIRROR_NAME=$MIRROR_NAME"

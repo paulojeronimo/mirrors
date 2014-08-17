@@ -8,11 +8,5 @@ cd "$BASEDIR/.."
 
 for mirror in `find . -maxdepth 1 -type d ! -name '.*'`
 do
-  for version in $mirror/*
-  do
-    for architecture in $version/*
-    do
-      rm -rf `basename $mirror`/`basename $version`/`basename $architecture`/mirror
-    done
-  done
+   rm -rf `basename $mirror`/mirror
 done

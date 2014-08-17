@@ -8,15 +8,9 @@ cd "$BASEDIR"
 
 for mirror in `find .. -maxdepth 1 -type d ! -name '.*'`
 do
-  for version in $mirror/*
-  do
-    for architecture in $version/*
-    do
-      name=`basename $mirror`-`basename $version`-`basename $architecture`
-      ln -s create-mirror-link create-mirror-link.$name
-      ./create-mirror-link.$name
-      ln -s mirror-from-external-hd mirror-from-external-hd.$name
-      ln -s mirror-to-external-hd mirror-to-external-hd.$name
-    done
-  done
+   mirror=`basename $mirror`
+   ln -s create-mirror-link create-mirror-link.$mirror
+   ./create-mirror-link.$mirror
+   ln -s mirror-from-external-hd mirror-from-external-hd.$mirror
+   ln -s mirror-to-external-hd mirror-to-external-hd.$mirror
 done

@@ -41,6 +41,7 @@ $RSYNC_RELEASES_DIR releases/$FEDORA_VERSION
 $sudo mkdir -p "$d/updates" && cd "$d"
 
 $sudo rsync --progress -avrt --delete --delete-excluded \
+--exclude "Live/*" \
 --exclude "armhfp/*" \
 --exclude "i386/*" \
 --exclude "x86_64/debug/*" \
