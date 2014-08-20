@@ -13,4 +13,5 @@ do
    ./create-mirror-link.$mirror
    ln -s mirror-from-external-hd mirror-from-external-hd.$mirror
    ln -s mirror-to-external-hd mirror-to-external-hd.$mirror
+   ln -s mirror-diff mirror-diff.$mirror
 done
