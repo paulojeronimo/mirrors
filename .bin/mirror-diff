@@ -20,7 +20,7 @@ case $os in
     ;;
 esac
 
-cd /tmp
+d=/tmp/mirror-diff_${USER}; mkdir -p $d && cd $d
 rm -rf $MIRROR_NAME*
 
 for d in $LOCAL $EXTERNAL
@@ -28,7 +28,7 @@ do
    rm -f $MIRROR_NAME
    ln -s $d/$MIRROR_NAME
    cd $MIRROR_NAME &> /dev/null
-   find . -type f | sort > /tmp/$MIRROR_NAME`echo $d | sed 's,/,\.,g'`
+   find . -type f | sort > $OLDPWD/$MIRROR_NAME`echo $d | sed 's,/,\.,g'`
    cd - &> /dev/null
 done
 
