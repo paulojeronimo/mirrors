@@ -1,0 +1,19 @@
+#!/bin/bash
+#Author: Paulo Jeronimo (@paulojeronimo, pj@paulojeronimo.info)
+
+BASE_DIR=`dirname "$0"`
+LOG_DIR=/tmp/mirror-all_${USER}
+LOG_TIME=`date +%Y%m%d-%H%M%S`
+VERBOSE=${VERBOSE:-false}
+
+mkdir -p "$LOG_DIR"
+for f in $(find "$BASE_DIR"/.. -mindepth 2 -maxdepth 2 -type f -name mirror.sh)
+do 
+    log=${f%/mirror.sh}
+    log="$LOG_DIR"/${log##*/}.$LOG_TIME.log
+    ($f &> "$log" &)
+done
+
+# TODO: If VERBOSE, do not put tail in background and
+# wait for all rsync finishes. After that, terminate tail
+$VERBOSE && tail -f "$LOG_DIR"/*.$LOG_TIME.log &
