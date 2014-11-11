@@ -1,0 +1,57 @@
+#!/bin/bash
+# Author: Paulo Jerônimo (@paulojeronimo, pj@paulojeronimo.info)
+#
+# This script clones a CentOS public mirror to use as a private
+# mirror in my teaching classes about Linux, JBoss and related
+# things.
+#
+# Some alternative rsync mirrors (near to Brazil)
+#
+#rsync://linorg.usp.br/CentOS/
+#rsync://mirrors.abdicar.com/costarica_CentOS/
+#rsync://centos.ufms.br/CentOS/
+set +x
+
+BASEDIR=`cd $(dirname "$0"); echo -n $PWD/../.bin`
+source "$BASEDIR/load-config"
+
+RSYNC_DIR=${RSYNC_DIR:-rsync://$CENTOS_MIRROR/$VERSION/}
+ONLY_NETINSTALL=${ONLY_NETINSTALL:-false}
+
+# CENTOS_MIRROR_DIR indicates the full PATH to the mirror directory. 
+# If you don't specify it, the mirror will be created in the same dir running this script.
+[ "$CENTOS_MIRROR_DIR" ] && \
+  d=$CENTOS_MIRROR_DIR || \
+  d=$(d=`dirname "$0"`/mirror; mkdir -p "$d" && cd "$d"; echo -n $PWD)
+
+[ -w "$d/" ] && unset sudo || sudo=sudo
+
+case $ARCHITECTURE in
+    i386)
+        iarch=i386
+        earch=x86_64
+        ;;
+    x86_64)
+        iarch=x86_64
+        earch=i386
+        ;;
+esac
+
+if $ONLY_NETINSTALL
+then
+    $sudo rsync --progress -avrt --delete --delete-excluded \
+    --include "isos/" \
+    --include "isos/$iarch/" \
+    --include "isos/$iarch/CentOS-$VERSION-$iarch-netinstall.iso" \
+    --exclude "*" \
+    $RSYNC_DIR "$d/"
+else
+    $sudo rsync --progress -avrt --delete --delete-excluded \
+    --include "isos/$iarch/CentOS-$VERSION-$iarch-netinstall.iso" \
+    --exclude "isos/$iarch/*" \
+    --exclude "isos/$earch" \
+    --exclude "local*" \
+    --exclude "centosplus" \
+    --exclude "$earch" \
+    $RSYNC_DIR "$d/"
+fi

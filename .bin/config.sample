@@ -5,3 +5,6 @@ EXTERNAL_MIRRORS_DIR_ON_DARWIN=/PJ-HFS/mirrors
 # Linux
 LOCAL_MIRRORS_DIR_ON_LINUX=/data/mirrors
 EXTERNAL_MIRRORS_DIR_ON_LINUX=/PJ-HFS/mirrors
+
+# CentOS (rsync) mirror
+CENTOS_MIRROR=linorg.usp.br/CentOS

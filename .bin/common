@@ -5,8 +5,16 @@
 
 source "$BASEDIR/functions"
 
-LINK_TO=`echo ${SCRIPT#*.}`; debug "LINK_TO=$LINK_TO"
-if [ -L "$BASEDIR/$SCRIPT" ]
+if [ "$SCRIPT" = "mirror.sh" ]
+then
+  LINK_TO=${BASEDIR%/../.bin}
+  LINK_TO=${LINK_TO##*/}
+  debug "LINK_TO=$LINK_TO"
+else
+  LINK_TO=`echo ${SCRIPT#*.}`; debug "LINK_TO=$LINK_TO"
+fi
+
+if [ -L "$BASEDIR/$SCRIPT" -o "$SCRIPT" = "mirror.sh" ]
 then
   MIRROR=`echo $LINK_TO | awk -F'-' '{ print $1; }'`
   VERSION=`echo $LINK_TO | awk -F'-' '{ print $2; }'`
@@ -18,3 +26,5 @@ VERSION=${VERSION:-$2}; debug "VERSION=$VERSION"
 ARCHITECTURE=${ARCHITECTURE:-$3}; debug "ARCHITECTURE=$ARCHITECTURE"
 NAME=$MIRROR-$VERSION-$ARCHITECTURE; debug "NAME=$NAME"
 MIRROR_NAME=${NAME}; debug "MIRROR_NAME=$MIRROR_NAME"
+
+# vim: set ts=2 sw=2 expandtab:
