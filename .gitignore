@@ -6,3 +6,4 @@
 .bin/mirror-to-external-hd.*
 .bin/mirror-diff.*
 **/mirror
+.disabled

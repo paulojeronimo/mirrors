@@ -7,9 +7,10 @@ LOG_TIME=`date +%Y%m%d-%H%M%S`
 VERBOSE=${VERBOSE:-false}
 
 mkdir -p "$LOG_DIR"
-for f in $(find "$BASE_DIR"/.. -mindepth 2 -maxdepth 2 -type f -name mirror.sh)
+for f in $(find "$BASE_DIR"/.. -mindepth 2 -maxdepth 2 -name mirror.sh)
 do 
     log=${f%/mirror.sh}
+    [ -f "$log"/.disabled ] && continue
     log="$LOG_DIR"/${log##*/}.$LOG_TIME.log
     ($f &> "$log" &)
 done
