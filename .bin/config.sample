@@ -1,6 +1,6 @@
 # OS X
 LOCAL_MIRRORS_DIR_ON_DARWIN=/data/mirrors
-EXTERNAL_MIRRORS_DIR_ON_DARWIN=/PJ-HFS/mirrors
+EXTERNAL_MIRRORS_DIR_ON_DARWIN='/HD Externo/overflow/mirrors'
 
 # Linux
 LOCAL_MIRRORS_DIR_ON_LINUX=/data/mirrors
